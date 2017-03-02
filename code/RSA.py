@@ -1,5 +1,4 @@
 def repeated_squaring(n, exponent, mod, print_steps=False):
-
     # NOTE assignment spec says must not use any BigIntegers or Power functions etc, just multiplication, modulo, etc.
 
     powers = [1]
@@ -37,3 +36,30 @@ def repeated_squaring(n, exponent, mod, print_steps=False):
 # print("Calculated 17^54 mod 139 = {}\n\n".format(repeated_squaring(17, 54, 139, True)))
 # print("Calculated 2345^65531 mod 265189 = {}\n\n".format(repeated_squaring(2345, 65531, 265189, True)))
 # print("Calculated 4733459^65537 mod 75968647 = {}\n\n".format(repeated_squaring(4733459, 65537, 75968647, True)))
+
+# Actual RSA - not just repeated_squaring
+
+def encrypt(M, exponent, mod):
+    return repeated_squaring(M, exponent, mod)
+
+
+def decrypt(C, private_d, mod):
+    return repeated_squaring(C, private_d, mod)
+
+# A encrypts M as C = M^e mod n.
+# B can decrypt using C^d = M^ed = M mod n.
+
+# In the questions below, the bank’s RSA public key is (76282747,65537); your own
+# public key is (9436709, 1676267) and your private key is d=3497603.
+bank_public_mod = 76282747
+bank_public_e = 65537
+
+my_public_mod = 9436709
+my_public_e = 1676267
+my_private_d = 3497603
+
+print("Question 5")
+print("{}\n".format(encrypt(654733, bank_public_e,  bank_public_mod)))
+
+print("Question 6")
+print("{}\n".format(decrypt(1684446, my_private_d, my_public_mod)))

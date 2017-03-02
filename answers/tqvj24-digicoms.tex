@@ -111,4 +111,31 @@ Calculations done by code, showing intermediate steps exactly as output from RSA
     Calculated 4733459^65537 mod 75968647 = 621879
 \end{verbatim}
 
+\section*{Question 5 - You wish to securely send the message M=654733 to the bank}
+\subsection*{i) State the calculation to encrypt this message for sending to the bank}
+$C = M^{e_{bank}}$ $mod$ $n_{bank}$\\
+$C = 654733^{65537}$ $mod$ $76282747$
+\subsection*{ii) State the encrypted value, calculated using your code}
+\begin{verbatim}
+    39964485
+\end{verbatim}
+
+\section*{Question 6 - The bank sends you an encrypted message 1684446}
+\subsection*{i) State the calculation used in decryption}
+$C^{d_{mine}} = M^{e_{mine}d_{mine}} = M$ $mod$ $n_{mine}$\\
+$C^{3497603} = M^{1676267\cdot3497603} = M$ $mod$ $9436709$
+\subsection*{ii) What is the decrypted value in this case?}
+\begin{verbatim}
+    1101011
+\end{verbatim}
+
+\section*{Question 7 - The bank requests a signed encrypted message from you so that they can verify that you are the sender and the message is secure in transmission to them.}
+You should encrypt the message and signature as two separate blocks. They already know your public key.
+% So is this sign the message, then separately encrypt the message and encrypt the signature?
+\subsection*{i) State the calculation to sign and encrypt the message 337722}
+% SIGN THEN ENCRYPT
+TODO
+\subsection*{ii) What is the transmission made for the message 337722 when it has been signed and encrypted?}
+TODO
+
 \end{document}
