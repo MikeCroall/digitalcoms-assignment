@@ -144,12 +144,7 @@ Encrypt the message\\
 $C_M = M^{e_{bank}}$ $mod$ $n_{bank}$\\\\
 Encrypt the signature\\
 $C_S = S^{e_{bank}}$ $mod$ $n_{bank}$\newpage
-% bank_public_mod = 76282747
-% bank_public_e = 65537
-%
-% my_public_mod = 9436709
-% my_public_e = 1676267
-% my_private_d = 3497603
+
 \noindent In this case,\\
 % to sign 337722 // as it uses MY d, it must have been me, and my public (which they know) and 'unsign'(using encrypt) to check it
 $S = 337722^{3497603}$ $mod$ $9436709$ \\ \\
@@ -160,15 +155,53 @@ Encrypt the signature\\
 $C_S = S^{65537}$ $mod$ $76282747$
 
 \subsection*{ii) What is the transmission made for the message 337722 when it has been signed and encrypted?}
-Intermediate step, sign the message
+Intermediate step, signing the message
 \begin{verbatim}
     S = 7218665
 \end{verbatim}
-Actual transmission made
+Actual transmission made below
 \begin{verbatim}
-    C_s = 59821766
-    C_m = 33191197
+    C(S) = 59821766
+    C(M) = 33191197
 \end{verbatim}
 
 
+\section*{Question 8}
+They return the following signed and encrypted message to you:\\
+(C(M),C(S)) = (4647068,526345)
+\subsection*{i) State the calculations required to decrypt and verify the message}
+To decrypt the message\\
+$C(M)^{d_{mine}} = M^{e_{mine}d_{mine}} = M$ $mod$ $n_{mine}$\\\\
+To decrypt the signature\\
+$C(S)^{d_{mine}} = S^{e_{mine}d_{mine}} = S$ $mod$ $n_{mine}$\\\\
+To 'un-sign' the signature (retrieve the message)\\
+$M_2 = S^{e_{bank}}$ $mod$ $n_{bank}$\\\\
+\newpage \noindent In this case,\\
+To decrypt the message\\
+$4647068^{3497603} = M^{1676267\cdot 3497603} = M$ $mod$ $9436709$\\\\
+To decrypt the signature\\
+$526345^{3497603} = S^{1676267\cdot 3497603} = S$ $mod$ $9436709$\\\\
+To 'un-sign' the signature (retrieve the message)\\
+$M_2 = S^{65537}$ $mod$ $76282747$\\\\
+
+\subsection*{ii) State the values in this case}
+\begin{verbatim}
+    Decrypted M = 7406060
+    Decrypted S = 8180219
+    'Un-signed' S = 64026314
+\end{verbatim}
+
+\subsection*{iii) State whether the signature is valid or not}
+It is not valid, as it does not match the decrypted M.
+
+
+\section*{Question 9}
+You wish to demonstrate to the bank that you know a third party (Bob), by showing a signed message that appears to come from Bob. Bob’s public key is (122269479,53407), but you do not know his private key. Construct a valid singed message from Bob, and show that the check calculations confirm that signature is valid.
+
 \end{document}
+% bank_public_mod = 76282747
+% bank_public_e = 65537
+%
+% my_public_mod = 9436709
+% my_public_e = 1676267
+% my_private_d = 3497603

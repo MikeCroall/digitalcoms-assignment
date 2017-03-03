@@ -78,3 +78,12 @@ if q7_m == q7_message_from_sig:
 else:
     raise AssertionError("Message and signature un-done do not match")
 
+print("Question 8")
+# (C(M),C(S)) = (4647068,526345)
+q8_c_m = 4647068
+q8_c_s = 526345
+q8_decrypted_m = decrypt(q8_c_m, my_private_d, my_public_mod)
+q8_decrypted_s = decrypt(q8_c_s, my_private_d, my_public_mod)
+q8_unsigned_s = encrypt(q8_decrypted_s, bank_public_e, bank_public_mod)
+print("\tDecrypted M = {}\n\tDecrypted S = {}\n\t'Un-signed' S = {}\n".format(q8_decrypted_m, q8_decrypted_s,
+                                                                              q8_unsigned_s))
