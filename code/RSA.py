@@ -100,5 +100,12 @@ print("Choose a signature, find the message it represents")
 q9_signature = 54321246
 q9_calculated_message = encrypt(q9_signature, bob_e, bob_n)
 print("\tChosen signature = {}\n\tCalculated message = {}\n".format(q9_signature, q9_calculated_message))
-
 print("Signature {} found to represent message: {}\n".format(q9_signature, repeated_squaring(q9_signature, bob_e, bob_n, True)))
+
+print("Question 10")
+q10_target = 58621765
+print("Brute forcing Bob's new PIN")
+for pin in range(1000):
+    if encrypt(pin, bank_public_e, bank_public_mod) == q10_target:
+        print("Bob's new PIN = {}".format(pin))
+        break
