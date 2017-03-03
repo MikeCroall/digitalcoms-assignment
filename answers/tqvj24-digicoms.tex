@@ -111,31 +111,64 @@ Calculations done by code, showing intermediate steps exactly as output from RSA
     Calculated 4733459^65537 mod 75968647 = 621879
 \end{verbatim}
 
-\section*{Question 5 - You wish to securely send the message M=654733 to the bank}
+\section*{Question 5}
+You wish to securely send the message M=654733 to the bank
 \subsection*{i) State the calculation to encrypt this message for sending to the bank}
-$C = M^{e_{bank}}$ $mod$ $n_{bank}$\\
+$C = M^{e_{bank}}$ $mod$ $n_{bank}$\\\\
+In this case,\\
 $C = 654733^{65537}$ $mod$ $76282747$
 \subsection*{ii) State the encrypted value, calculated using your code}
 \begin{verbatim}
     39964485
 \end{verbatim}
 
-\section*{Question 6 - The bank sends you an encrypted message 1684446}
+\section*{Question 6}
+The bank sends you an encrypted message 1684446
 \subsection*{i) State the calculation used in decryption}
-$C^{d_{mine}} = M^{e_{mine}d_{mine}} = M$ $mod$ $n_{mine}$\\
+$C^{d_{mine}} = M^{e_{mine}d_{mine}} = M$ $mod$ $n_{mine}$\\\\
+In this case,\\
 $C^{3497603} = M^{1676267\cdot3497603} = M$ $mod$ $9436709$
 \subsection*{ii) What is the decrypted value in this case?}
 \begin{verbatim}
     1101011
 \end{verbatim}
 
-\section*{Question 7 - The bank requests a signed encrypted message from you so that they can verify that you are the sender and the message is secure in transmission to them.}
-You should encrypt the message and signature as two separate blocks. They already know your public key.
-% So is this sign the message, then separately encrypt the message and encrypt the signature?
+\section*{Question 7}
+The bank requests a signed encrypted message from you so that they can verify that you are the sender and the message is secure in transmission to them. You should encrypt the message and signature as two separate blocks. They already know your public key.
 \subsection*{i) State the calculation to sign and encrypt the message 337722}
-% SIGN THEN ENCRYPT
-TODO
+% to sign 337722 // as it uses MY d, it must have been me, and my public (which they know) and 'unsign'(using encrypt) to check it
+Sign the message\\
+$S = M^{d_{mine}}$ $mod$ $n_{mine}$ \\ \\
+% to encrypt the signed message
+Encrypt the message\\
+$C_M = M^{e_{bank}}$ $mod$ $n_{bank}$\\\\
+Encrypt the signature\\
+$C_S = S^{e_{bank}}$ $mod$ $n_{bank}$\newpage
+% bank_public_mod = 76282747
+% bank_public_e = 65537
+%
+% my_public_mod = 9436709
+% my_public_e = 1676267
+% my_private_d = 3497603
+\noindent In this case,\\
+% to sign 337722 // as it uses MY d, it must have been me, and my public (which they know) and 'unsign'(using encrypt) to check it
+$S = 337722^{3497603}$ $mod$ $9436709$ \\ \\
+% to encrypt the signed message
+Encrypt the message\\
+$C_M = 337722^{65537}$ $mod$ $76282747$\\\\
+Encrypt the signature\\
+$C_S = S^{65537}$ $mod$ $76282747$
+
 \subsection*{ii) What is the transmission made for the message 337722 when it has been signed and encrypted?}
-TODO
+Intermediate step, sign the message
+\begin{verbatim}
+    S = 7218665
+\end{verbatim}
+Actual transmission made
+\begin{verbatim}
+    C_s = 59821766
+    C_m = 33191197
+\end{verbatim}
+
 
 \end{document}

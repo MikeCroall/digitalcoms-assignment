@@ -46,6 +46,7 @@ def encrypt(M, exponent, mod):
 def decrypt(C, private_d, mod):
     return repeated_squaring(C, private_d, mod)
 
+
 # A encrypts M as C = M^e mod n.
 # B can decrypt using C^d = M^ed = M mod n.
 
@@ -59,7 +60,21 @@ my_public_e = 1676267
 my_private_d = 3497603
 
 print("Question 5")
-print("{}\n".format(encrypt(654733, bank_public_e,  bank_public_mod)))
+print("{}\n".format(encrypt(654733, bank_public_e, bank_public_mod)))
 
 print("Question 6")
 print("{}\n".format(decrypt(1684446, my_private_d, my_public_mod)))
+
+print("Question 7")
+q7_m = 337722
+q7_s = decrypt(q7_m, my_private_d, my_public_mod)
+q7_c_s = encrypt(q7_s, bank_public_e, bank_public_mod)
+q7_c_m = encrypt(q7_m, bank_public_e, bank_public_mod)
+# test signature validity
+q7_message_from_sig = encrypt(q7_s, my_public_e, my_public_mod)
+if q7_m == q7_message_from_sig:
+    print("Signature matches, cannot test encrypted signature or message as don't have bank private d")
+    print("\tS:{}\n\tC_s:{}\n\tC_m:{}\n".format(q7_s, q7_c_s, q7_c_m))
+else:
+    raise AssertionError("Message and signature un-done do not match")
+
