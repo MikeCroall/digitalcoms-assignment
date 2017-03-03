@@ -196,9 +196,50 @@ It is not valid, as it does not match the decrypted M.
 
 
 \section*{Question 9}
-You wish to demonstrate to the bank that you know a third party (Bob), by showing a signed message that appears to come from Bob. Bob’s public key is (122269479,53407), but you do not know his private key. Construct a valid singed message from Bob, and show that the check calculations confirm that signature is valid.
+You wish to demonstrate to the bank that you know a third party (Bob), by showing a signed message that appears to come from Bob. Bob’s public key is (122269479, 53407), but you do not know his private key. Construct a valid signed message from Bob, and show that the check calculations confirm that signature is valid.
+\begin{verbatim}
+    Chosen signature = 54321246
+    Calculated message = 36464280
+\end{verbatim}
+We check that the chosen signature is valid for this message by 'un-signing' it, using Bob's public key, to retrieve the message it represents. (If we had access to Bob's private key, we could also verify by signing the message.)\\\\
+Verify $M = S^{e_{bob}}$ $mod$ $n_{bob}$\\
+Verify $36464280 = 54321246^{53407}$ $mod$ $122269479$\\
+The steps carried out to verify this result are shown below
+\begin{verbatim}
+    54321246^1 = 54321246 mod 122269479
+    54321246^2 = 81646755 mod 122269479
+    54321246^4 = 83557920 mod 122269479
+    54321246^8 = 57369570 mod 122269479
+    54321246^16 = 119457924 mod 122269479
+    54321246^32 = 119700675 mod 122269479
+    54321246^64 = 114747744 mod 122269479
+    54321246^128 = 86356824 mod 122269479
+    54321246^256 = 27923511 mod 122269479
+    54321246^512 = 95156322 mod 122269479
+    54321246^1024 = 48525369 mod 122269479
+    54321246^2048 = 81219015 mod 122269479
+    54321246^4096 = 15183681 mod 122269479
+    54321246^8192 = 53006622 mod 122269479
+    54321246^16384 = 90264669 mod 122269479
+    54321246^32768 = 71323281 mod 122269479
+
+    Starting with 54321246^32768 mod 122269479
+    Multiplying by 54321246^16384, to reach 54321246^49152 mod 122269479
+    Multiplying by 54321246^4096, to reach 54321246^53248 mod 122269479
+    Multiplying by 54321246^128, to reach 54321246^53376 mod 122269479
+    Multiplying by 54321246^16, to reach 54321246^53392 mod 122269479
+    Multiplying by 54321246^8, to reach 54321246^53400 mod 122269479
+    Multiplying by 54321246^4, to reach 54321246^53404 mod 122269479
+    Multiplying by 54321246^2, to reach 54321246^53406 mod 122269479
+    Multiplying by 54321246^1, to reach 54321246^53407 mod 122269479
+    Signature 54321246 found to represent message: 36464280
+\end{verbatim}
+
+\section*{Question 10}
+
 
 \end{document}
+
 % bank_public_mod = 76282747
 % bank_public_e = 65537
 %

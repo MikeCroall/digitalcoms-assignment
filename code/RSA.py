@@ -85,5 +85,20 @@ q8_c_s = 526345
 q8_decrypted_m = decrypt(q8_c_m, my_private_d, my_public_mod)
 q8_decrypted_s = decrypt(q8_c_s, my_private_d, my_public_mod)
 q8_unsigned_s = encrypt(q8_decrypted_s, bank_public_e, bank_public_mod)
-print("\tDecrypted M = {}\n\tDecrypted S = {}\n\t'Un-signed' S = {}\n".format(q8_decrypted_m, q8_decrypted_s,
-                                                                              q8_unsigned_s))
+print("\tDecrypted M = {}\n\tDecrypted S = {}\n\t'Un-signed' S = {}".format(q8_decrypted_m, q8_decrypted_s,
+                                                                            q8_unsigned_s))
+if q8_unsigned_s == q8_decrypted_m:
+    print("Valid signature (matches decrypted m)")
+else:
+    print("Invalid signature (does not match decrypted m)")
+print("")
+
+print("Question 9")
+print("Generating a signed message from Bob, knowing only bob's public exponent and modulus")
+bob_n, bob_e = 122269479, 53407
+print("Choose a signature, find the message it represents")
+q9_signature = 54321246
+q9_calculated_message = encrypt(q9_signature, bob_e, bob_n)
+print("\tChosen signature = {}\n\tCalculated message = {}\n".format(q9_signature, q9_calculated_message))
+
+print("Signature {} found to represent message: {}\n".format(q9_signature, repeated_squaring(q9_signature, bob_e, bob_n, True)))
