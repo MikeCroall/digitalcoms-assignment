@@ -21,7 +21,7 @@ Decoding $ZVTVKGVBLNWYJVCLBOOHSSKFIGWYOEDNZ$ with key $GOLDCOINS$ gave \\
 \end{verbatim}
 
 \section*{Question 3}
-Using $C1$, $C2$, and $C3$, the following $M$ was found
+Essentially $C2 - C1 = K_B$ (done by decrypting $C2$ with the key being $C1$), allowing me to decrypt $C3$ with key $K_B$ to get $M =$ the following
 \begin{verbatim}
     ASSOONASWESTARTEDPROGRAMMINGWEFOUNDTOOURSURPRISETHATITWASNT
     ASEASYTOGETPROGRAMSRIGHTASWEHADTHOUGHTDEBUGGINGHADTOBE
@@ -29,10 +29,10 @@ Using $C1$, $C2$, and $C3$, the following $M$ was found
     PARTOFMYLIFEFROMTHENONWASGOINGTOBESPENTINFINDINGMISTAKESINMY
     OWNPROGRAMSMAURICEWILKESDISCOVERSDEBUGGING
 \end{verbatim}
-Please note, line breaks were added for readability, and are \textbf{not} part of the original message
+Please note, line breaks were added for readability, and are \textbf{not} part of the original message, nor part of the alphabet
 
 \section*{Question 4}
-Calculations done by code, showing intermediate steps exactly as output from RSA.py
+Calculations done by code, showing intermediate steps exactly as output by RSA.py
 \subsection*{$17^{54}$ $mod$ $139$ = 125}
 \begin{verbatim}
     17^1 = 17 mod 139
@@ -113,29 +113,29 @@ Calculations done by code, showing intermediate steps exactly as output from RSA
 
 \section*{Question 5}
 You wish to securely send the message M=654733 to the bank
-\subsection*{i) State the calculation to encrypt this message for sending to the bank}
+\subsection*{i) Calculation used to encrypt this message for sending to the bank}
 $C = M^{e_{bank}}$ $mod$ $n_{bank}$\\\\
 In this case,\\
 $C = 654733^{65537}$ $mod$ $76282747$
-\subsection*{ii) State the encrypted value, calculated using your code}
+\subsection*{ii) The encrypted value, calculated by my code}
 \begin{verbatim}
     39964485
 \end{verbatim}
 
 \section*{Question 6}
 The bank sends you an encrypted message 1684446
-\subsection*{i) State the calculation used in decryption}
+\subsection*{i) Calculation used in decryption}
 $C^{d_{mine}} = M^{e_{mine}d_{mine}} = M$ $mod$ $n_{mine}$\\\\
 In this case,\\
 $C^{3497603} = M^{1676267\cdot3497603} = M$ $mod$ $9436709$
-\subsection*{ii) What is the decrypted value in this case?}
+\subsection*{ii) The decrypted value in this case}
 \begin{verbatim}
     1101011
 \end{verbatim}
 
 \section*{Question 7}
 The bank requests a signed encrypted message from you so that they can verify that you are the sender and the message is secure in transmission to them. You should encrypt the message and signature as two separate blocks. They already know your public key.
-\subsection*{i) State the calculation to sign and encrypt the message 337722}
+\subsection*{i) The calculation to sign and encrypt the message 337722}
 % to sign 337722 // as it uses MY d, it must have been me, and my public (which they know) and 'unsign'(using encrypt) to check it
 Sign the message\\
 $S = M^{d_{mine}}$ $mod$ $n_{mine}$ \\ \\
@@ -154,7 +154,7 @@ $C_M = 337722^{65537}$ $mod$ $76282747$\\\\
 Encrypt the signature\\
 $C_S = S^{65537}$ $mod$ $76282747$
 
-\subsection*{ii) What is the transmission made for the message 337722 when it has been signed and encrypted?}
+\subsection*{ii) The transmission made for the message 337722 when it has been signed and encrypted}
 Intermediate step, signing the message
 \begin{verbatim}
     S = 7218665
@@ -169,7 +169,7 @@ Actual transmission made below
 \section*{Question 8}
 They return the following signed and encrypted message to you:\\
 (C(M),C(S)) = (4647068,526345)
-\subsection*{i) State the calculations required to decrypt and verify the message}
+\subsection*{i) The calculations required to decrypt and verify the message}
 To decrypt the message\\
 $C(M)^{d_{mine}} = M^{e_{mine}d_{mine}} = M$ $mod$ $n_{mine}$\\\\
 To decrypt the signature\\
@@ -184,15 +184,15 @@ $526345^{3497603} = S^{1676267\cdot 3497603} = S$ $mod$ $9436709$\\\\
 To 'un-sign' the signature (retrieve the message)\\
 $M_2 = S^{65537}$ $mod$ $76282747$
 
-\subsection*{ii) State the values in this case}
+\subsection*{ii) The values in this case}
 \begin{verbatim}
     Decrypted M = 7406060
     Decrypted S = 8180219
     'Un-signed' S = 64026314
 \end{verbatim}
 
-\subsection*{iii) State whether the signature is valid or not}
-It is not valid, as it does not match the decrypted M.
+\subsection*{iii) Signature validity}
+It is not valid, as after being 'un-signed', it does not match the decrypted M.
 
 
 \section*{Question 9}
@@ -201,7 +201,7 @@ You wish to demonstrate to the bank that you know a third party (Bob), by showin
     Chosen signature = 54321246
     Calculated message = 36464280
 \end{verbatim}
-We check that the chosen signature is valid for this message by 'un-signing' it, using Bob's public key, to retrieve the message it represents. (If we had access to Bob's private key, we could also verify by signing the message.)\\\\
+We check that the chosen signature is valid for this message by 'un-signing' it, using Bob's public key, to retrieve the message it represents.\\\\
 Verify $M = S^{e_{bob}}$ $mod$ $n_{bob}$\\
 Verify $36464280 = 54321246^{53407}$ $mod$ $122269479$\\
 The steps carried out to verify this result are shown below
@@ -237,7 +237,7 @@ The steps carried out to verify this result are shown below
 
 \section*{Question 10}
 You intercept a message from Bob to the bank, which says: “My new 3-digit PIN code is in the encrypted attachment. Yours Bob.” and comes with the attachment (58621765). How can you crack such a message and what is Bob’s new PIN?\\\\
-Being only three digits, there are only 1000 possible PINs. As we know the Bank's public key, we can brute force values $000, 001, ..., 999$, encrypting each of them with the Bank's public key, until one of them matches $58621765$, at which point we have found Bob's new PIN.
+Being only three digits, there are only 1000 possible PINs. As we know the Bank's public key, we can brute force values $000, 001, ..., 999$, encrypting each of them with the Bank's public key, until one of them matches $58621765$, at which point we have found Bob's new PIN. As this is such a small range of possiblities, the brute force inefficiency is negligible in this case.\\\\My brute force, at the bottom of RSA.py, found the following
 \begin{verbatim}
     Bob's new pin = 777
 \end{verbatim}
@@ -246,7 +246,7 @@ Being only three digits, there are only 1000 possible PINs. As we know the Bank'
 
 % bank_public_mod = 76282747
 % bank_public_e = 65537
-%
+
 % my_public_mod = 9436709
 % my_public_e = 1676267
 % my_private_d = 3497603
