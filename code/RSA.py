@@ -1,3 +1,7 @@
+#
+#	tqvj24
+#
+
 def repeated_squaring(n, exponent, mod, print_steps=False):
     # NOTE assignment spec says must not use any BigIntegers or Power functions etc, just multiplication, modulo, etc.
 
@@ -32,12 +36,12 @@ def repeated_squaring(n, exponent, mod, print_steps=False):
     return ret
 
 
-# print("Question 4\n")
-# print("Calculated 17^54 mod 139 = {}\n\n".format(repeated_squaring(17, 54, 139, True)))
-# print("Calculated 2345^65531 mod 265189 = {}\n\n".format(repeated_squaring(2345, 65531, 265189, True)))
-# print("Calculated 4733459^65537 mod 75968647 = {}\n\n".format(repeated_squaring(4733459, 65537, 75968647, True)))
+print("Question 4\n")
+print("Calculated 17^54 mod 139 = {}\n\n".format(repeated_squaring(17, 54, 139, True)))
+print("Calculated 2345^65531 mod 265189 = {}\n\n".format(repeated_squaring(2345, 65531, 265189, True)))
+print("Calculated 4733459^65537 mod 75968647 = {}\n\n".format(repeated_squaring(4733459, 65537, 75968647, True)))
 
-# Actual RSA - not just repeated_squaring
+# Actual RSA wrappers for repeated squaring function
 
 def encrypt(M, exponent, mod):
     return repeated_squaring(M, exponent, mod)

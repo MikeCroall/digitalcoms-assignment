@@ -237,7 +237,7 @@ The steps carried out to verify this result are shown below
 
 \section*{Question 10}
 You intercept a message from Bob to the bank, which says: “My new 3-digit PIN code is in the encrypted attachment. Yours Bob.” and comes with the attachment (58621765). How can you crack such a message and what is Bob’s new PIN?\\\\
-Being only three digits, there are only 1000 possible PINs. As we know the Bank's public key, we can brute force values $000, 001, ..., 999$, encrypting each of them with the Bank's public key, until one of them matches $58621765$, at which point we have found Bob's new PIN. As this is such a small range of possiblities, the brute force inefficiency is negligible in this case.\\\\My brute force, at the bottom of RSA.py, found the following
+Being only three digits, there are only 1000 possible PINs. As we know the Bank's public key, we can brute force values $000, 001, ..., 999$, encrypting each of them with the Bank's public key, until one of them matches $58621765$, at which point we have found Bob's new PIN. As this is such a small range of possiblities, the inefficiency of brute force is negligible in this case.\\\\My brute force, at the bottom of RSA.py, found the following
 \begin{verbatim}
     Bob's new pin = 777
 \end{verbatim}
