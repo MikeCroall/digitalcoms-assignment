@@ -1,7 +1,3 @@
-#
-#	tqvj24
-#
-
 def repeated_squaring(n, exponent, mod, print_steps=False):
     # NOTE assignment spec says must not use any BigIntegers or Power functions etc, just multiplication, modulo, etc.
 

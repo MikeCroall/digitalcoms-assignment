@@ -1,13 +1,3 @@
-#
-#	tqvj24
-#
-
-# NOTE
-#
-# The code for the VigenereCipher class was adapted from my own VignereCipher code
-# originally used for a challenge on CodeWars.com
-
-
 class VigenereCipher(object):
     def __init__(self, key):
         self.k = key
