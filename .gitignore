@@ -3,3 +3,5 @@
 *.fls
 *.log
 code/.idea/
+*.zip
+answers/
